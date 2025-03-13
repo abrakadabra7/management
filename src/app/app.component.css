@@ -1,0 +1,18 @@
+.app-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background-color: #f7fafc;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 64px auto 80px;
+  width: 100%;
+}
+
+:host-context(.dark-mode) .app-container {
+  background-color: #1a202c;
+}

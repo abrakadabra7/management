@@ -1,0 +1,95 @@
+<div class="dashboard">
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <div *ngIf="loading" class="loading">
+    {{ translate('loading') }}
+  </div>
+
+  <div class="form-card" [class.disabled]="loading">
+    <h2 class="card-title">{{ translate('new_task') }}</h2>
+    <div class="form-content">
+      <div class="form-group">
+        <label for="project">{{ translate('project_name') }}</label>
+        <input type="text" id="project" [(ngModel)]="currentTask.project" class="form-control" [placeholder]="translate('enter_project_name')" [disabled]="loading">
+      </div>
+
+      <div class="form-group">
+        <label for="item_number">{{ translate('item_number') }}</label>
+        <input type="text" id="item_number" [(ngModel)]="currentTask.item_number" class="form-control" [placeholder]="translate('enter_item_number')" [disabled]="loading">
+      </div>
+
+      <div class="form-group">
+        <label for="description">{{ translate('task_description') }}</label>
+        <textarea id="description" [(ngModel)]="currentTask.description" class="form-control" rows="4" [placeholder]="translate('enter_task_description')" [disabled]="loading"></textarea>
+      </div>
+
+      <div class="button-group">
+        <button class="btn btn-primary" (click)="startTask()" [disabled]="loading || activeTask">
+          <i class="fas fa-play"></i> {{ activeTask ? translate('task_in_progress') : translate('start_task') }}
+        </button>
+        <button class="btn btn-danger" (click)="endTask()" [disabled]="loading || !activeTask">
+          <i class="fas fa-stop"></i> {{ translate('end_task') }}
+        </button>
+        <button class="btn btn-success" (click)="exportToExcel()">
+          <i class="fas fa-file-excel"></i> {{ translate('export_excel') }}
+        </button>
+      </div>
+
+      <!-- Aktif görev sayacı -->
+      <div *ngIf="activeTask" class="active-task-timer">
+        <div class="timer">
+          <i class="fas fa-clock"></i>
+          <span class="time">{{ elapsedTime }}</span>
+        </div>
+        <p class="task-info">
+          <strong>{{ translate('active_task') }}:</strong> {{ activeTask.project }} - {{ activeTask.description }}
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tasks-card">
+    <div class="card-header">
+      <h2 class="card-title">{{ translate('tasks') }}</h2>
+      <div class="task-count">{{ tasks.length }} {{ translate('task_count') }}</div>
+    </div>
+    
+    <div class="tasks-content">
+      <div class="task-item" *ngFor="let task of tasks">
+        <div class="task-header">
+          <span class="project-name">{{ task.project }}</span>
+          <span class="item-number">#{{ task.item_number }}</span>
+        </div>
+        <p class="task-description">{{ task.description }}</p>
+        <div class="task-footer">
+          <div class="time-info">
+            <span class="start-time" *ngIf="task.start_time">
+              <i class="fas fa-clock"></i> {{ task.start_time | date:'HH:mm:ss' }}
+            </span>
+            <span class="duration" *ngIf="task.duration">
+              <i class="fas fa-hourglass-half"></i> {{ task.duration }} saat
+            </span>
+          </div>
+          <div class="task-actions">
+            <div class="task-status" [class.active]="task.status === 'active'">
+              {{ task.status === 'active' ? translate('active') : translate('completed') }}
+            </div>
+            <button *ngIf="task.status === 'completed'" 
+                    class="btn btn-icon btn-danger" 
+                    (click)="deleteTask(task.id!)"
+                    [disabled]="loading">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="no-tasks" *ngIf="!loading && tasks.length === 0">
+        <i class="fas fa-tasks"></i>
+        <p>{{ translate('no_tasks') }}</p>
+      </div>
+    </div>
+  </div>
+</div> 

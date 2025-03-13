@@ -1,0 +1,11 @@
+<div class="language-selector">
+  <button 
+    class="lang-btn" 
+    (click)="toggleLanguage()">
+    <img 
+      [src]="'assets/flags/' + currentLang + '.svg'" 
+      [alt]="currentLang === 'tr' ? 'Türkçe' : 'English'" 
+      class="flag-icon"
+    >
+  </button>
+</div> 
