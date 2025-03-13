@@ -1,5 +1,21 @@
 # Management
+## Yapılanlar
+### 12/03/2025
+- Proje oluşturuldu
+- Navbar yapıldı
+- Home page oluşturuldu
+- Anasayfa ve footer tamamen tamamlandı
+  
+### 13/03/2025
+- Verıtabanına bağlandı
+- Hatalar giderildi
+- Dil seçeneği ve dark mod eklendi
 
+<br>
+
+## Youtube Videosu İçin Görsele Tıklayabilirsiniz 
+[<img src="https://github.com/abrakadabra7/management/blob/master/%D0%A1%D0%BD%D0%B8%D0%BC%D0%BE%D0%BA%20%D1%8D%D0%BA%D1%80%D0%B0%D0%BD%D0%B0%202025-03-13%20134218.png" width="50%">](https://youtu.be/y-uU9-cSFHQ " Management ")
+<br><br>
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.1.8.
 
 ## Development server
